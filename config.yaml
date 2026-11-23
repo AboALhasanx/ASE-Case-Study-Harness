@@ -1,0 +1,21 @@
+# Execution settings
+project:
+  name: ASE Case Study Harness
+  version: 0.1.0
+  course: Advanced Software Engineering
+  language: en
+  status: foundation
+case_study:
+  target_repository_url: null
+  target_revision: null
+  target_local_path: null
+  analysis_scope: null
+  instructor_approved: false
+execution:
+  mode: auto
+  subagents: enabled_when_available
+  max_revisions_per_phase: 2
+  require_human_gate_after_each_phase: true
+materials:
+  root: knowledge/
+  chapter_10_in_scope: null
