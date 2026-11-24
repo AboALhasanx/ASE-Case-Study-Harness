@@ -8,7 +8,7 @@ Use the focused guides for Chapters 1–9 and the supplemental Chapter 10 below.
 - common overclaims or limitations;
 - reviewer checks.
 
-Do not copy long passages from the course notes. The core case study covers Chapters 1–9. Treat Chapter 10 as supplementary unless the instructor confirms otherwise.
+Do not copy long passages from the course notes. The core case study covers Chapters 1–9. Chapter 10 is always supplemental and is included only when relevant to the target.
 
 `knowledge/index/ase_knowledge.sqlite3` can locate relevant passages quickly. Search with `python scripts/search_knowledge.py "<concepts>"`; then confirm the cited page in the original PDF.
 

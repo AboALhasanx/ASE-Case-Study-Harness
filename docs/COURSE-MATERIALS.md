@@ -15,11 +15,11 @@ The supplied folder contains ten PDF files and 589 pages in total. The titles be
 | `Ch07_Software_Reliability.pdf` | 85 | Chapter 7 — Software Reliability | Ch7: reliability and quality evidence |
 | `Ch08_Software_Testing.pdf` | 153 | Chapter 8 — Software Testing | Ch8: test strategy, test evidence, and observed results |
 | `Ch09.pdf` | 33 | Chapter 9 — Software Maintenance | Ch9: maintenance history, change, and impact analysis |
-| `Ch10_Software_Certification.pdf` | 11 | Chapter 10 — Software Certification | Supplementary certification / quality-assurance topic; inclusion in the required course scope needs confirmation |
+| `Ch10_Software_Certification.pdf` | 11 | Chapter 10 — Software Certification | Supplemental certification / quality-assurance lens when directly relevant to the target |
 
 ## Scope note
 
-The shared project discussion describes the case study as covering nine chapters, ending with Software Maintenance (Chapter 9). The supplied folder also contains a clearly labeled Chapter 10, Software Certification. The harness should keep the core mapping at Chapters 1–9 unless the instructor confirms Chapter 10 is in scope; it can then be added as an optional extension. Do not silently drop or merge the supplied Chapter 10 material.
+The shared project discussion describes the case study as covering nine chapters, ending with Software Maintenance (Chapter 9). The supplied folder also contains a clearly labeled Chapter 10, Software Certification. Keep Chapters 1–9 as the core mapping and use Chapter 10 as a clearly labeled supplement when certification evidence is relevant; do not pause to ask whether it is in scope.
 
 The chapter mapping is a working index, not a claim that every concept in each source has already been extracted. When a phase uses course theory, cite the relevant PDF and page(s), and distinguish course guidance from observations made about the target system.
 

@@ -1,3 +1,3 @@
 # Workflow overview
 
-The case study advances through the gated phases in `PLANS.md`. Keep each team's work isolated under `case-studies/<team-slug>/` and preserve a resumable status note after every approved phase. The initial phase records the target, study scope, access constraints, and evidence plan before repository analysis begins.
+The case study advances through the phases in `PLANS.md` without interactive approval gates. The only required input is a target repository URL. The agent pins the default-branch HEAD, derives the study scope, and continues automatically. Keep each team's work isolated under `case-studies/<team-slug>/` and preserve a resumable checkpoint after every phase. If a check is unsafe or unavailable, log the limitation and continue independent analysis.

@@ -7,15 +7,16 @@ project:
   status: foundation
 case_study:
   target_repository_url: null
-  target_revision: null
+  target_revision: current_default_branch_HEAD_at_fetch
   target_local_path: null
-  analysis_scope: null
-  instructor_approved: false
+  analysis_scope: derive_from_repository; full_repository_when_practical
+  team_slug: derive_from_repository_name_and_head_sha
 execution:
   mode: auto
   subagents: enabled_when_available
   max_revisions_per_phase: 2
-  require_human_gate_after_each_phase: true
+  require_human_gate_after_each_phase: false
+  ask_for_missing_input: repository_url_only
 materials:
   root: knowledge/
-  chapter_10_in_scope: null
+  chapter_10_in_scope: supplemental_when_relevant

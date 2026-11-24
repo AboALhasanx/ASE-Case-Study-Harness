@@ -25,7 +25,7 @@
 - Target revision, language inventory, source boundaries, and machine-readable count output where applicable.
 - Documented system functions and data/interface examples if constructing a function-point estimate.
 - Estimation formula, model version/source, parameter choices, conversion assumptions, and arithmetic worksheet.
-- For the student project, agreed scope, task breakdown, schedule constraints, tools/resources, and a risk register.
+- For the student case study, derive scope, task breakdown, and tools/resources from the repository and normal course deliverables; record schedule assumptions and risks without asking for preferences.
 
 ## Method
 

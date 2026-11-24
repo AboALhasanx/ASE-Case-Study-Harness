@@ -1,6 +1,6 @@
 # Chapter 10 — Software Certification (supplementary)
 
-**Source:** `knowledge/Ch10_Software_Certification.pdf` (11 PDF pages; printed text begins at p. 492). This chapter is supplemental and is not part of the core Chapter 1–9 case study unless the instructor confirms it is in scope.
+**Source:** `knowledge/Ch10_Software_Certification.pdf` (11 PDF pages; printed text begins at p. 492). This chapter is supplemental, not part of the core Chapter 1–9 coverage. Apply it only when certification evidence is relevant to the target, and label it supplemental without pausing for approval.
 
 ## Concepts and source locations
 
@@ -9,7 +9,7 @@
 - Third-party certification for component-based software: PDF pp. 4–5 (printed pp. 495–496).
 - Exercises/review material: PDF pp. 6–11 (printed pp. 497–502).
 
-## Case-study questions (only if approved)
+## Supplemental case-study questions (when relevant)
 
 1. Does the target project publicly claim a specific product, process, or component certification?
 2. If a claim exists, who issued it, what exact scope/version/standard does it cover, and can a primary source verify it?
@@ -26,5 +26,5 @@
 
 - Do not infer certification from compliance language, process maturity, or quality tooling.
 - Do not apply the chapter's historical examples as current standards without checking official sources.
-- Make the optional status explicit and get instructor approval before counting this chapter toward coverage.
+- Make the supplemental status explicit; do not count this chapter toward the core Chapter 1–9 coverage.
 - Check that the evidence identifies issuer, standard, scope, version, validity period, and source provenance; disclose unavailable details.

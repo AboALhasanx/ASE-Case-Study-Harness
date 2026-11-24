@@ -7,7 +7,7 @@ Help a student team produce a defensible, evidence-backed case study of a select
 ## Before work
 
 1. Read `GOALS.md` and `PLANS.md`.
-2. Read `context/PROJECT.md` if present. If target URL, snapshot/version, team scope, or permitted test environment is missing, ask only the questions needed to proceed; do not silently choose a target.
+2. Read `context/PROJECT.md` if present. The only required user input is the target repository URL. If it is missing, ask for that URL and nothing else. Derive the rest from the repository and the defaults below; never pause for phase approvals or scope preferences.
 3. Read `docs/COURSE-MATERIALS.md`. Retrieve relevant concepts with `python scripts/search_knowledge.py "<topic>"` before opening whole PDFs. Verify the returned source page for context, figures, and tables; distinguish course claims from target-system evidence.
 4. Record decisions and unresolved questions in `context/DECISIONS.md` and `context/PROGRESS.md`.
 
@@ -25,11 +25,13 @@ Help a student team produce a defensible, evidence-backed case study of a select
 ## Workflow
 
 - Follow `PLANS.md` in order and save a concise checkpoint after each phase.
-- Scope the target before analysis. Pin the repository URL and commit/tag/date in `context/PROJECT.md` so findings can be reproduced.
-- Prefer read-only analysis. Run target code or tests only in an isolated environment and only when needed for an agreed research question. Explain prerequisites and record exact commands/results.
-- Keep the review loop bounded: identify a concrete acceptance gap, gather or verify evidence, revise, then re-check. Stop when criteria pass or when a blocker requires a human decision.
+- On receiving the URL, fetch the repository's default branch and pin the exact HEAD commit before analysis. Record the URL, branch, commit, and retrieval time automatically. If the remote does not expose a default branch, use its advertised HEAD or the available checkout branch and record that fallback. Do not ask the user to choose a revision.
+- If the target is private or inaccessible with available read access, do not request credentials; analyze only accessible repository metadata and report the limitation, while finishing the course mapping and all other independent work.
+- Derive the case-study question from the repository's README, docs, code, tests, and history. Analyze the repository as a whole when practical; for very large repositories, select central representative components, explain the sampling rule, and disclose the boundary without asking the user.
+- Prefer read-only analysis. Run only local, bounded checks that do not touch live services, external accounts, or user data. If a check could cause side effects, skip it and report the limitation; do not stop to seek approval.
+- Keep the review loop bounded: identify a concrete acceptance gap, gather or verify evidence, revise, then re-check. Continue through all phases without human approval gates. If a true technical blocker remains, record it and finish all independent analysis.
 - Use specialized subagents only for independent bounded analyses (for example, tests, maintenance history, or design). Give each a clear scope and output path. The lead agent reconciles overlaps, checks citations, and owns final conclusions. Work sequentially if subagents are unavailable.
-- Do not begin broad parallel analyses before the target and snapshot are set.
+- Begin bounded parallel analyses after the URL and exact commit have been captured. Do not ask for permission between phases.
 
 ## Outputs
 

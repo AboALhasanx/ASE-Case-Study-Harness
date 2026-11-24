@@ -17,7 +17,7 @@
 
 - Who are the evidenced user classes and external systems? Which stakeholders are absent from public sources?
 - Which functional capabilities can be traced to documentation, UI/API behavior, tests, or maintained issue discussions?
-- Which non-functional concerns are explicitly specified or can be tested within the approved environment?
+- Which non-functional concerns are explicitly specified or can be tested safely in a local, isolated environment?
 - Can representative workflows be modeled with use cases, DFD/data dictionary, or ER diagrams using evidence from the target?
 - Are reconstructed requirements clear, consistent, bounded, and verifiable? Which remain inferred or unknown?
 

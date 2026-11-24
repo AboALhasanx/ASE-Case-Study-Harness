@@ -1,17 +1,14 @@
 # Active case study configuration
 
-Fill this file only after the team selects and approves a target.
+The only user-supplied field is the repository URL. If it is absent, ask for that URL and nothing else. After receiving it, automatically populate all remaining fields from the repository and these defaults.
 
-- Team slug:
-- Target repository URL:
-- Target revision (tag, commit SHA, or snapshot date):
-- License:
-- Study question and boundary:
-- Exclusions:
-- Permitted environment for experiments:
-- Team approval date:
-- Instructor AI-use constraints:
+- Target repository URL: (user input)
+- Default branch and fetched HEAD commit: (auto-detect and pin)
+- Retrieval timestamp: (automatic)
+- Project/team slug: (derive from repository name and short HEAD SHA)
+- License: (inspect repository evidence; label unknown if unavailable)
+- Study question and boundary: (derive from README, docs, source, tests, and history)
+- Exclusions and sampling: (derive from repository size and available evidence; explain in the report)
+- Execution boundary: read-only by default; only local, bounded, non-destructive checks
 
-## Decisions
-
-Link the target-screening evidence and decision record under `context/`.
+Do not ask the user to choose a revision, team slug, study question, chapter scope, or phase approval. Store the completed target manifest and decisions under `case-studies/<team-slug>/context/`.

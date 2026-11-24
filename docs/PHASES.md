@@ -4,11 +4,11 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 ## 0 — Bootstrap and scope
 
-**Do:** Inventory the supplied chapters, tools, workspace, and any instructor constraints. Record the course's chapter titles from the actual materials; do not assume a numbering scheme if file names or contents disagree. Confirm which chapters are in scope (the shared brief maps Chapters 1–9 and also includes a Software Certification chapter).
+**Do:** Load the supplied chapter inventory, RAG index, and available tools. Use Chapters 1–9 as the core scope and Chapter 10 as a supplemental lens when relevant. Derive defaults from the repository and do not ask the user for scope or tool preferences.
 
 **Artifacts:** initial shared inventory in `docs/COURSE-MATERIALS.md`; team-specific project state, decisions, and progress under `case-studies/<team-slug>/context/`.
 
-**Gate:** Materials and scope are accounted for; unavailable/unclear items are named. No target-system analysis starts on an assumed repository.
+**Gate:** Materials and defaults are accounted for automatically; unavailable or unclear items are logged without pausing.
 
 ## 1 — Course knowledge map
 
@@ -18,21 +18,21 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Gate:** Every in-scope chapter is represented and the matrix makes clear which claims can be tested against repository evidence. Record OCR or page-number uncertainty.
 
-## 2 — Target repository screening and selection
+## 2 — Target repository baseline
 
-**Do:** Compare a small set of plausible systems (the conversation suggested Kanboard, BookStack, Snipe-IT, FreshRSS, and Flask as starting candidates). Check maintainable scope, license, accessible source/history/issues/docs, test availability, language/tool fit, and whether important course concepts can be evidenced. These names are candidates, not a preselection. Ask the team to choose after seeing the screening evidence.
+**Do:** Use the repository URL provided by the user. Fetch its default branch and pin the exact HEAD commit and retrieval time. Infer the study question from the repository purpose and inspect its license, history, documentation, tests, and safe setup. Derive a practical boundary from repository size; do not ask the user to choose a revision or scope. Never substitute a suggested project for an inaccessible URL.
 
-**Artifacts:** `case-studies/<team-slug>/context/target-screening.md`, decision entry with chosen URL, exact ref/commit, date, scope exclusions, and rationale.
+**Artifacts:** `case-studies/<team-slug>/context/target-manifest.md`, with URL, default branch, exact commit, retrieval time, scope, exclusions, and rationale.
 
-**Gate:** The team explicitly chooses the target and study boundary. Do not clone or audit a different target based only on a conversational suggestion.
+**Gate:** The supplied URL, default branch, exact commit, retrieval time, inferred boundary, and access limits are recorded. Continue without an approval pause.
 
 ## 3 — Repository baseline and reproducibility
 
-**Do:** Record upstream URL, license, release/tag/commit SHA, repository structure, languages, setup instructions, and relevant dependency/tool versions. Attempt only safe, documented setup steps. Capture command, environment summary, date, and full result for build/test commands; protect secrets and personal paths.
+**Do:** Record upstream URL, license, release/tag/commit SHA, repository structure, languages, setup instructions, and relevant dependency/tool versions. Attempt only safe, local, documented setup steps. Skip commands that could affect live services, external accounts, or user data, and record why. Capture command, environment summary, date, and result for checks that are run; protect secrets and personal paths.
 
 **Artifacts:** `case-studies/<team-slug>/evidence/repository-manifest.md`, `case-studies/<team-slug>/evidence/setup-log.md`, raw outputs or stable references.
 
-**Gate:** Another student can identify the exact studied revision and understand what did and did not run. A failed setup is documented as a blocker, never reported as a passing test.
+**Gate:** Another student can identify the exact studied revision and understand what did and did not run. A failed setup is documented as a limitation, never reported as a passing test.
 
 ## 4 — Lifecycle and requirements (course lifecycle and requirements chapters)
 
@@ -76,11 +76,11 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 ## 9 — Verification and critique
 
-**Do:** Use a second reviewer/agent when available to challenge evidence, formulas, chapter coverage, source quality, contradictions, and overclaims. Compare conclusions against raw evidence and correct the source artifact, not just the narrative. Sequential self-review is the fallback.
+**Do:** Use a second reviewer/agent when available to challenge evidence, formulas, chapter coverage, source quality, contradictions, and overclaims. Compare conclusions against raw evidence and correct the source artifact, not just the narrative. Sequential self-review is the fallback. Do not wait for a human to approve the critique.
 
 **Artifacts:** `case-studies/<team-slug>/validation/findings-review.md`, citation/evidence ledger, issue list, correction log.
 
-**Gate:** Every important conclusion has a traceable basis; calculations have checks; contradictions and open questions are resolved or disclosed; all gaps have an owner/next action.
+**Gate:** Every important conclusion has a traceable basis; calculations have checks; contradictions and open questions are resolved or disclosed; all gaps have a next action. Log remaining limits and continue to final packaging.
 
 ## 10 — Final report, seminar, and viva
 

@@ -20,7 +20,7 @@ Cover the nine course chapters with the following initial mapping. Verify exact 
 | 8 | Software Testing | Test inventory and, where feasible, bounded test execution with recorded results |
 | 9 | Software Maintenance | Change history, maintenance patterns, defects, and evolution evidence |
 
-This is a review, not a rebuild of the target. Do not promise claims that cannot be established from public artifacts or approved experiments. Keep the target-system scope feasible for a student seminar.
+This is a review, not a rebuild of the target. Do not promise claims that cannot be established from repository artifacts or safe local checks. Keep the target-system scope feasible for a student seminar.
 
 ## Acceptance criteria
 
@@ -33,7 +33,7 @@ A case study is complete only when:
 5. **Uncertainty is visible:** facts, inferences, estimates, and unknowns are distinguished; estimates show assumptions; conflicting evidence is discussed.
 6. **Independent review is done:** a critic pass checks coverage, arithmetic, citations, scope, and unsupported language; issues are resolved or listed as open limitations.
 7. **Deliverables are present:** academic report, seminar outline or slides, evidence index, progress/decision log, and viva questions with evidence-grounded answers.
-8. **Human sign-off is captured:** the team checks the final claims and confirms it can explain the methods and limitations.
+8. **Review and learning support are present:** an independent critic pass checks the final claims, and the viva materials explain the methods and limitations so students can verify and learn from the work. The harness completes without waiting for sign-off.
 
 ## Out of scope for the starter
 
@@ -44,4 +44,4 @@ A case study is complete only when:
 
 ## Stop conditions
 
-Pause and request a student decision if the target is not selected, the intended test could affect a live service or data, required access/permissions are missing, course-material redistribution rights are unclear for a public upload, or a finding cannot be supported after bounded review. Record the blocker and the next action in `context/PROGRESS.md`.
+The only routine input request is the target repository URL. If it is missing, ask for that URL only. For inaccessible repositories, risky checks, or unsupported claims, continue independent work and record the blocker, fallback method, and next action in the final report; do not ask for credentials or phase approvals.
