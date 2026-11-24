@@ -39,9 +39,13 @@ See `PLANS.md` for phases and `GOALS.md` for completion criteria. Study outputs 
 
 ## Course materials and repository access
 
-The provided PDFs are instructor/course materials and are included in `knowledge/` in this private repository at the owner's request. Their presence here does not establish permission to redistribute them. Keep this repository private and do not add collaborators or publish a public copy until the instructor or rights holder confirms the allowed sharing scope. Respect the target project's license when quoting or copying its code and documents.
+The owner confirmed permission to share the provided course PDFs for this project. They are included in `knowledge/` and remain attributed course materials; their inclusion does not make them openly licensed. Respect any course-specific use limits, and respect the target project's license when quoting or copying its code and documents.
 
 See `docs/COURSE-MATERIALS.md` for the verified inventory and chapter mapping. The core study covers Chapters 1–9; Chapter 10, Software Certification, remains supplementary pending instructor confirmation.
+
+## Fast course-material retrieval
+
+The repo includes a local SQLite FTS5 index of page-addressable PDF passages in `knowledge/index/ase_knowledge.sqlite3`. Search it with `python scripts/search_knowledge.py "your topic"`; results include source PDF and page number. Rebuild it after changing the PDFs with `python scripts/build_knowledge_index.py`. Retrieval is lexical BM25 and requires no API key or model download. Confirm any cited passage in the original PDF page, especially for diagrams and tables.
 
 ## Suggested target systems
 
@@ -62,7 +66,9 @@ The shared planning conversation suggested Kanboard as the first candidate, with
 - `PLANS.md` — ordered, resumable workflow.
 - `prompts/` — compact launch and phase prompts.
 - `knowledge/` — supplied PDFs and course material guide.
+- `knowledge/index/` — generated local RAG retrieval database.
 - `chapter-guides/` — chapter-to-evidence guidance.
 - `context/` — target configuration, decisions, and progress.
 - `templates/` — claim and evidence log templates.
+- `workflows/AGENT-ROLES.md` — bounded multi-agent work split and reviewer role.
 - `validation/` — acceptance rules and critique checklist.

@@ -25,7 +25,7 @@ The chapter mapping is a working index, not a claim that every concept in each s
 
 ## Handling and redistribution
 
-These are instructor-provided course notes. The PDFs were included in this owner's private repository at the owner's request; their inclusion does not establish redistribution permission. Keep the remote private and do not add collaborators or publish a public copy until the instructor or rights holder confirms the allowed sharing scope. If permission is not granted, remove the PDFs from any shared copy and provide the chapter map with instructions for students to use their own authorized course materials. Do not claim the notes are openly licensed.
+These are instructor-provided course notes. The owner confirmed permission to share them for this project. Keep the course attribution and follow any class-specific use limits; do not claim the notes are openly licensed. The SQLite FTS5 retrieval index is generated from these PDFs, retains page citations, and is a navigation aid rather than a replacement for checking the source page.
 
 ## Suggested local layout
 

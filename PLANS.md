@@ -6,7 +6,7 @@ The harness must support both specialized subagents when the current Codex envir
 
 ## Operating rules
 
-1. Treat the course materials as the academic baseline. Cite chapter and section/page when it can be identified; flag uncertain mappings for human review.
+1. Treat the course materials as the academic baseline. Use the local SQLite retrieval index to locate relevant passages quickly, then confirm the source PDF page and cite chapter and section/page; flag uncertain mappings for human review.
 2. Separate **Observed** (directly evidenced), **Inferred** (reasoned from evidence), and **Estimated** (model-based approximation) claims. Use **Not available** when a fact cannot be established.
 3. Every material claim must point to a source: a course-material location, source file and line, commit/issue/PR, test output, or stable external reference. Record retrieval date for sources that may change.
 4. Never invent source history, requirements, costs, metrics, test outcomes, citations, or author intent. Mark an unverified result as pending rather than filling the gap.

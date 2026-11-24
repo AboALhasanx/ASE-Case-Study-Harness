@@ -30,7 +30,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Record upstream URL, license, release/tag/commit SHA, repository structure, languages, setup instructions, and relevant dependency/tool versions. Attempt only safe, documented setup steps. Capture command, environment summary, date, and full result for build/test commands; protect secrets and personal paths.
 
-**Artifacts:** `evidence/repository-manifest.md`, `evidence/setup-log.md`, raw outputs or stable references.
+**Artifacts:** `case-studies/<team-slug>/evidence/repository-manifest.md`, `case-studies/<team-slug>/evidence/setup-log.md`, raw outputs or stable references.
 
 **Gate:** Another student can identify the exact studied revision and understand what did and did not run. A failed setup is documented as a blocker, never reported as a passing test.
 
@@ -38,7 +38,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Trace releases, commits, issues, roadmap, and documentation to infer the development model. Reconstruct only requirements supported by externally visible behavior, docs, tests, or issues. Give each requirement an ID, source, rationale, confidence, and verification idea.
 
-**Artifacts:** lifecycle analysis; requirements/SRS draft; traceability matrix.
+**Artifacts:** lifecycle analysis; requirements/SRS draft; traceability matrix under `case-studies/<team-slug>/`.
 
 **Gate:** Facts about project history are observed; lifecycle model is explicitly an inference. Reconstructed requirements are distinguished from original author requirements, which may be unavailable.
 
@@ -46,7 +46,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Apply course planning concepts to the bounded case study. If estimating hypothetical project effort/cost, state model, inputs, assumptions, ranges, and why this is not the original project's actual cost. Analyze architecture and design from code/docs; cite paths/lines and distinguish direct structure from interpretation.
 
-**Artifacts:** planning and risk note; architecture/context diagrams; design observations.
+**Artifacts:** planning and risk note; architecture/context diagrams; design observations under `case-studies/<team-slug>/`.
 
 **Gate:** Estimates are labelled **Estimated**, assumptions are visible, and no unobservable developer intent is stated as fact.
 
@@ -54,7 +54,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Choose metrics relevant to the course and repository. Define each metric, unit, scope, formula/tool/version, exclusions, command, and raw result. Review quality/reliability evidence such as tests, defect history, CI, and releases; repository activity alone is not proof of reliability.
 
-**Artifacts:** metrics worksheet/report and raw machine-readable results where practical; quality/reliability evidence table.
+**Artifacts:** metrics worksheet/report and raw machine-readable results where practical; quality/reliability evidence table under `case-studies/<team-slug>/`.
 
 **Gate:** Calculations can be reproduced and manually spot-checked. Claims do not exceed what the sample or available evidence supports.
 
@@ -62,7 +62,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Map the target's test levels/types and evaluate representative cases. Run safe tests if setup permits; save exact commands and outcomes. If not, label cases as designed/proposed and report execution as unavailable. Connect certification concepts to documented criteria or standards only where sources support the connection; do not claim the software is certified based on a superficial comparison.
 
-**Artifacts:** test inventory, test plan/cases, execution record, certification discussion with primary-source citations when applicable.
+**Artifacts:** test inventory, test plan/cases, execution record, certification discussion with primary-source citations when applicable, under `case-studies/<team-slug>/`.
 
 **Gate:** Executed tests, static inspection, and proposed tests are clearly separated. A certification conclusion states scope, criteria, and limitations or remains undetermined.
 
@@ -70,7 +70,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Define a sampling window and selection method for commits/issues/releases. Classify representative changes as corrective, adaptive, perfective, or preventive only with a linked change and rationale; allow ambiguous/unclassifiable. Avoid cherry-picking only dramatic examples.
 
-**Artifacts:** sample method, commit/change table, maintenance analysis.
+**Artifacts:** sample method, commit/change table, maintenance analysis under `case-studies/<team-slug>/`.
 
 **Gate:** Each classification has evidence and reasoning. Sample limitations and ambiguous cases are reported.
 
@@ -78,7 +78,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Use a second reviewer/agent when available to challenge evidence, formulas, chapter coverage, source quality, contradictions, and overclaims. Compare conclusions against raw evidence and correct the source artifact, not just the narrative. Sequential self-review is the fallback.
 
-**Artifacts:** `validation/findings-review.md`, citation/evidence ledger, issue list, correction log.
+**Artifacts:** `case-studies/<team-slug>/validation/findings-review.md`, citation/evidence ledger, issue list, correction log.
 
 **Gate:** Every important conclusion has a traceable basis; calculations have checks; contradictions and open questions are resolved or disclosed; all gaps have an owner/next action.
 
@@ -86,7 +86,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Assemble an academic report, seminar deck, supporting SRS/design/metrics/testing/maintenance artifacts, evidence repository, and viva questions from verified outputs. Include methodology, limitations, AI-use disclosure according to instructor rules, and reproducibility notes. The proposed sizes (30–50 report pages and 15–25 slides) are optional targets from the conversation, not requirements.
 
-**Artifacts:** `deliverables/report/`, `deliverables/seminar/`, `deliverables/viva/`, plus final evidence index.
+**Artifacts:** `case-studies/<team-slug>/deliverables/report/`, `case-studies/<team-slug>/deliverables/seminar/`, `case-studies/<team-slug>/deliverables/viva/`, plus final evidence index.
 
 **Gate:** Report and slides agree with the evidence ledger; every chart/table can be traced to data; references are checked; viva material tests understanding rather than memorization. Students review and can defend the findings.
 

@@ -8,5 +8,7 @@
 - Execution: Codex Goal when available; bounded specialized subagents when available; sequential fallback otherwise.
 - Evidence rule: label claims Observed, Inferred, Estimated, or Not available; cite sources and methods.
 - User-requested materials: ten supplied PDFs copied to `knowledge/`.
-- Remote handling: private repository only while redistribution permission is unconfirmed.
-- Next gate: confirm project/course scope and decide who may access the PDFs before sharing the remote with classmates.
+- Materials sharing: owner confirmed permission to share the PDFs for this project; keep course attribution and any class-specific use limits.
+- Repository visibility: public, per owner instruction.
+- Course retrieval: local SQLite FTS5 BM25 database provides page-linked snippets; confirm source page before citing.
+- Next gate: finish the first target screening and get the team's explicit selection before upstream analysis.
