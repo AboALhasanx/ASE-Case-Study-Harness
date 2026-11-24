@@ -75,4 +75,5 @@ The shared planning conversation mentioned Kanboard, BookStack, Flask, and Snipe
 - `context/` — target configuration, decisions, and progress.
 - `templates/` — claim and evidence log templates.
 - `workflows/AGENT-ROLES.md` — bounded multi-agent work split and reviewer role.
+- `scripts/master_studio/` — copied Master Studio tools for image-rich seminar slides, diagrams and Office PDF previews; see its README for dependencies and limitations.
 - `validation/` — acceptance rules and critique checklist.

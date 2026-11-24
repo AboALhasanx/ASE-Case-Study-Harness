@@ -20,3 +20,5 @@ From one repository URL, produce an evidence-backed case study with an editable 
 - Word and presentation files open, are editable, and agree with the verified source materials.
 - Final output includes a review log covering both evidence and visual inspection; missing rendering tools or inaccessible sources are disclosed.
 - Documented commands and dependencies let another student reproduce the files without API keys.
+
+On Windows with Microsoft Office, `scripts/master_studio/office_to_pdf.py --engine com --no-qa` provides faithful PDF previews for visual inspection. See `scripts/master_studio/README.md` for prerequisites and limitations; an automated text QA result alone is not visual review. The copied seminar builder supports evidence images and speaker notes as an alternative presentation path.
