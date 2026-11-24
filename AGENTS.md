@@ -37,6 +37,8 @@ Help a student team produce a defensible, evidence-backed case study of a select
 
 Write study artifacts under `case-studies/<team-slug>/`, following existing templates where useful. Keep raw logs concise and scrub sensitive data. Add references and an access date for external information. Preserve generated work at each phase so another session can resume. Keep shared harness guidance and course material separate from each team's case-study outputs.
 
+Produce an editable academic Word report and editable PowerPoint seminar with their source files, following `docs/DEVELOPMENT-PLAN.md` and the generation guides. Use only verified findings in both. Render and inspect every page and slide when tools are available, fix layout problems, and log the review; if a required tool or check is unavailable, explicitly record the missing output or verification instead of asserting completion. Keep the URL as the only required input and continue independent work without asking for format preferences.
+
 ## Course-material files
 
 The owner has confirmed permission to share the PDFs for this course project. Keep them attributed as supplied course materials and do not claim or assign an open license. Follow any course-specific use limits. Do not remove page citations when using extracted passages.

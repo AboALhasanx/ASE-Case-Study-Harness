@@ -32,7 +32,7 @@ A case study is complete only when:
 4. **Methods are reproducible:** commands, tool/version, environment, dates, and relevant outputs are recorded for measurements and tests.
 5. **Uncertainty is visible:** facts, inferences, estimates, and unknowns are distinguished; estimates show assumptions; conflicting evidence is discussed.
 6. **Independent review is done:** a critic pass checks coverage, arithmetic, citations, scope, and unsupported language; issues are resolved or listed as open limitations.
-7. **Deliverables are present:** academic report, seminar outline or slides, evidence index, progress/decision log, and viva questions with evidence-grounded answers.
+7. **Deliverables are present:** editable academic Word report (`.docx`), editable seminar presentation (`.pptx`), their source files, evidence index, progress/decision log, and viva questions with evidence-grounded answers. If a generator or renderer is unavailable, provide source material and explicitly report the missing deliverable or verification; do not mark it complete.
 8. **Review and learning support are present:** an independent critic pass checks the final claims, and the viva materials explain the methods and limitations so students can verify and learn from the work. The harness completes without waiting for sign-off.
 
 ## Out of scope for the starter

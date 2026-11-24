@@ -39,6 +39,8 @@ For a one-phase run, use `prompts/PHASE-PROMPTS.md` and name the phase.
 
 See `PLANS.md` for phases and `GOALS.md` for completion criteria. Study outputs belong under `case-studies/<team-slug>/` in the team's working copy. Do not commit secrets, credentials, or unrelated personal data.
 
+The final package includes an editable `.docx` report and `.pptx` seminar, plus their source files and evidence. Install dependencies with `python -m pip install -r requirements.txt`. The agent follows [`docs/WORD-GENERATION.md`](docs/WORD-GENERATION.md), [`docs/SLIDES-GENERATION.md`](docs/SLIDES-GENERATION.md), and [`docs/DEVELOPMENT-PLAN.md`](docs/DEVELOPMENT-PLAN.md), then renders and checks each page and slide when a renderer is available. Missing tools or visual checks are reported explicitly.
+
 ## Course materials and repository access
 
 The owner confirmed permission to share the provided course PDFs for this project. They are included in `knowledge/` and remain attributed course materials; their inclusion does not make them openly licensed. Respect any course-specific use limits, and respect the target project's license when quoting or copying its code and documents.

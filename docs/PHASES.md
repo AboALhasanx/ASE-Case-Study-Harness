@@ -86,9 +86,9 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Assemble an academic report, seminar deck, supporting SRS/design/metrics/testing/maintenance artifacts, evidence repository, and viva questions from verified outputs. Include methodology, limitations, AI-use disclosure according to instructor rules, and reproducibility notes. The proposed sizes (30–50 report pages and 15–25 slides) are optional targets from the conversation, not requirements.
 
-**Artifacts:** `case-studies/<team-slug>/deliverables/report/`, `case-studies/<team-slug>/deliverables/seminar/`, `case-studies/<team-slug>/deliverables/viva/`, plus final evidence index.
+**Artifacts:** editable Word report (`.docx`) and editable PowerPoint (`.pptx`), their source files, viva material and final evidence index under `case-studies/<team-slug>/deliverables/`. Follow `docs/DEVELOPMENT-PLAN.md` and the generator guides.
 
-**Gate:** Report and slides agree with the evidence ledger; every chart/table can be traced to data; references are checked; viva material tests understanding rather than memorization. Students review and can defend the findings.
+**Gate:** Report and slides agree with the evidence ledger; every chart/table can be traced to data; references are checked; viva material tests understanding rather than memorization. Open and render both files when tooling is available, inspect all pages/slides for legibility, clipping, overflow and alignment, fix defects, and repeat. Record any unavailable format or visual inspection explicitly as incomplete; do not claim a successful review without evidence.
 
 ## Evidence record minimum
 
