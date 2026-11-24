@@ -6,6 +6,8 @@ objects and remain editable. The output starts with a cover, followed by one sli
 each input slide. Content is not fact-checked by the generator: verify every claim and
 source against the evidence ledger before presenting.
 
+Keep visible slide content and citations in English. Provide an Arabic presenter narration for each slide in a separate `arabic-presenter-script.md` and in the slide's `notes` field. The narration should explain the same evidence without adding unsupported claims. Inspect the notes in a presentation application to confirm Arabic legibility; notes are not visible to the audience in the slide view.
+
 ## Install
 
 From the repository root, install the runtime dependencies:
@@ -58,7 +60,7 @@ Existing output files are protected by default; pass `--force` to replace one.
 }
 ```
 
-`title` and a non-empty `slides` array are required. Each slide needs a `title` and may
+`title` and a non-empty `slides` array are required. Set `cover_notes` in JSON for the Arabic narration of the automatically created cover slide; set each content slide's `notes` for its narration. Markdown input cannot express cover notes, so use JSON when a cover narration must be embedded. Each slide needs a `title` and may
 include `body`, `bullets` (array of strings), `section`, `citations` (string or array),
 `notes`, and `layout`. Layout is `content` by default; `section` gives the slide a pale
 background for a chapter divider. `notes` are added to the PowerPoint speaker notes

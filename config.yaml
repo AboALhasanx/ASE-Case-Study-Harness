@@ -4,6 +4,7 @@ project:
   version: 0.1.0
   course: Advanced Software Engineering
   language: en
+  presenter_narration_language: ar
   status: foundation
 case_study:
   target_repository_url: null

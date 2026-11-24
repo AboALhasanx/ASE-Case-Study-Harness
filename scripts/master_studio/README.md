@@ -10,7 +10,7 @@ These utilities were copied from `90_Shared_Toolbox/tools` in the Master Studio 
 python scripts/master_studio/seminar_deck_builder.py deck.md -o deck.pptx
 ```
 
-This is an additional visual option; inspect every slide for overflow, verify all sources, and do not rely on it to check citations or layout. It does not support more than one image on a slide or images on title slides. Its input is distinct from the JSON/Markdown schema of `scripts/generate_slides.py`.
+This is an additional visual option; inspect every slide for overflow, verify all sources, and do not rely on it to check citations or layout. It does not support fenced code blocks, more than one image on a slide or images on title slides. Its input is distinct from the JSON/Markdown schema of `scripts/generate_slides.py`.
 
 ## Office preview PDFs
 

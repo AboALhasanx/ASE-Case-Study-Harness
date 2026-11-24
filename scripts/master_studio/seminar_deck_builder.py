@@ -50,18 +50,44 @@ SW, SH = 13.333, 7.5   # inches
 
 
 def strip_emojis(t: str) -> str:
-    return re.sub(r'[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF]', '', t).strip()
+    # Preserve scientific symbols, arrows and non-BMP characters in source text.
+    return t.strip()
 
 
 def parse_deck(md_path: Path):
-    text = md_path.read_text(encoding='utf-8')
-    raw_slides = re.split(r'\n---\n', text)
+    text = md_path.read_text(encoding='utf-8-sig').replace('\r\n', '\n').replace('\r', '\n')
+    lines = text.split('\n')
+    # Only a leading YAML frontmatter block is metadata. A line containing
+    # "paginate:" inside a slide is ordinary content, never a reason to skip it.
+    if lines and lines[0].strip() == '---':
+        try:
+            end = next(i for i in range(1, len(lines)) if lines[i].strip() == '---')
+        except StopIteration:
+            raise ValueError('Unclosed frontmatter: expected a closing ---') from None
+        lines = lines[end + 1:]
+    raw_slides = []
+    block = []
+    in_notes_block = False
+    for line in lines:
+        if not in_notes_block and re.match(r'^\s*(?:`{3,}|~{3,})', line):
+            raise ValueError('Fenced code blocks are unsupported; use plain slide text or an image')
+        if line.strip().startswith('::: notes'):
+            if in_notes_block:
+                raise ValueError('Nested speaker notes blocks are unsupported')
+            in_notes_block = True
+        elif line.strip() == ':::' and in_notes_block:
+            in_notes_block = False
+        if line.strip() == '---' and not in_notes_block:
+            raw_slides.append('\n'.join(block)); block = []
+        else:
+            block.append(line)
+    if in_notes_block:
+        raise ValueError('Unclosed speaker notes block')
+    raw_slides.append('\n'.join(block))
     slides = []
     for raw in raw_slides:
         raw = raw.strip()
         if not raw:
-            continue
-        if raw.startswith('marp:') or 'paginate:' in raw:
             continue
         is_lead = '<!-- _class: lead -->' in raw
         lines = raw.split('\n')
@@ -80,12 +106,19 @@ def parse_deck(md_path: Path):
                 else:
                     notes.append(line)
                 continue
-            if '<!--' in s and '-->' in s:
-                continue
+            if '<!--' in s or '-->' in s:
+                if s.count('<!--') != s.count('-->'):
+                    raise ValueError('Multiline or unclosed HTML comments are unsupported')
+                line = re.sub(r'<!--.*?-->', '', line)
+                s = line.strip()
+                if not s:
+                    continue
             if not title and (s.startswith('# ') or s.startswith('## ')):
                 title = strip_emojis(re.sub(r'^#+\s*', '', s))
             else:
                 body.append(line)
+        if not title:
+            raise ValueError('Each slide must contain a # or ## title')
         slides.append({
             "title": title,
             "body": [b for b in body if b.strip()],
@@ -118,17 +151,18 @@ def add_title(slide, title, size=31):
 def fill_text(tf, body_lines, first_is_new=False):
     idx = 0
     for line in body_lines:
+        indent = len(line) - len(line.lstrip(' '))
         s = strip_emojis(line.strip())
         if not s:
             continue
         p = tf.paragraphs[0] if (idx == 0 and not first_is_new) else tf.add_paragraph()
         idx += 1
-        if s.startswith('- ') or s.startswith('* '):
+        if (s.startswith('- ') or s.startswith('* ')) and indent >= 2:
+            p.text = "–  " + s[2:]; p.font.size = Pt(17.5); p.space_after = Pt(8)
+            p.font.color.rgb = SUB; p.level = 1
+        elif s.startswith('- ') or s.startswith('* '):
             p.text = "•  " + s[2:]; p.font.size = Pt(21); p.space_after = Pt(12)
             p.font.color.rgb = INK
-        elif s.startswith('  - ') or s.startswith('  * ') or s.startswith('    - '):
-            p.text = "–  " + s.lstrip(' -*'); p.font.size = Pt(17.5); p.space_after = Pt(8)
-            p.font.color.rgb = SUB
         elif re.match(r'^\d+\.\s', s):
             p.text = s; p.font.size = Pt(20); p.space_after = Pt(10); p.font.color.rgb = INK
         elif s.startswith('> '):
@@ -206,7 +240,7 @@ def build(md_path: Path, pptx_path: Path):
             p0.font.size = Pt(38); p0.font.bold = True; p0.font.name = FONT
             p0.font.color.rgb = NAVY; p0.space_after = Pt(20)
             for bl in s["body"]:
-                c = strip_emojis(bl.strip().lstrip('#').strip())
+                c = strip_emojis(bl.strip())
                 if not c:
                     continue
                 p = tf.add_paragraph(); p.text = c; p.font.size = Pt(18)

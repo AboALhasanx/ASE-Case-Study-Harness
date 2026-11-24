@@ -18,6 +18,7 @@ From one repository URL, produce an evidence-backed case study with an editable 
 - No questions after the target URL under normal conditions; derive and record revision and study boundary.
 - Every material conclusion is traceable, and all nine core chapters have coverage or an explicit limitation.
 - Word and presentation files open, are editable, and agree with the verified source materials.
+- All student-facing content is English. Supply Arabic presenter narration for each slide as a separate script and in PowerPoint notes when supported.
 - Final output includes a review log covering both evidence and visual inspection; missing rendering tools or inaccessible sources are disclosed.
 - Documented commands and dependencies let another student reproduce the files without API keys.
 

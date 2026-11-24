@@ -39,7 +39,7 @@ For a one-phase run, use `prompts/PHASE-PROMPTS.md` and name the phase.
 
 See `PLANS.md` for phases and `GOALS.md` for completion criteria. Study outputs belong under `case-studies/<team-slug>/` in the team's working copy. Do not commit secrets, credentials, or unrelated personal data.
 
-The final package includes an editable `.docx` report and `.pptx` seminar, plus their source files and evidence. Install dependencies with `python -m pip install -r requirements.txt`. The agent follows [`docs/WORD-GENERATION.md`](docs/WORD-GENERATION.md), [`docs/SLIDES-GENERATION.md`](docs/SLIDES-GENERATION.md), and [`docs/DEVELOPMENT-PLAN.md`](docs/DEVELOPMENT-PLAN.md), then renders and checks each page and slide when a renderer is available. Missing tools or visual checks are reported explicitly.
+The final package includes an editable `.docx` report and `.pptx` seminar, plus their source files and evidence. Student-facing material is in English; an Arabic presenter script accompanies each slide and is embedded in speaker notes when supported. Install dependencies with `python -m pip install -r requirements.txt`. The agent follows [`docs/WORD-GENERATION.md`](docs/WORD-GENERATION.md), [`docs/SLIDES-GENERATION.md`](docs/SLIDES-GENERATION.md), and [`docs/DEVELOPMENT-PLAN.md`](docs/DEVELOPMENT-PLAN.md), then renders and checks each page and slide when a renderer is available. Missing tools or visual checks are reported explicitly.
 
 ## Course materials and repository access
 
@@ -77,3 +77,4 @@ The shared planning conversation mentioned Kanboard, BookStack, Flask, and Snipe
 - `workflows/AGENT-ROLES.md` — bounded multi-agent work split and reviewer role.
 - `scripts/master_studio/` — copied Master Studio tools for image-rich seminar slides, diagrams and Office PDF previews; see its README for dependencies and limitations.
 - `validation/` — acceptance rules and critique checklist.
+- `docs/EVIDENCE-CHECK.md` — structural ledger check; a reviewer must still check the actual sources and all deliverable claims.

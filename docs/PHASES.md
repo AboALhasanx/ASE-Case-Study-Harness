@@ -20,7 +20,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 ## 2 — Target repository baseline
 
-**Do:** Use the repository URL provided by the user. Fetch its default branch and pin the exact HEAD commit and retrieval time. Infer the study question from the repository purpose and inspect its license, history, documentation, tests, and safe setup. Derive a practical boundary from repository size; do not ask the user to choose a revision or scope. Never substitute a suggested project for an inaccessible URL.
+**Do:** Use the repository URL provided by the user. Run `python scripts/prepare_target.py <repository-url>` to clone and write the manifest, or resume an existing matching study without overwriting it; see `docs/TARGET-BASELINE.md`. Pin the exact HEAD commit and retrieval time. Infer the study question from the repository purpose and inspect its license, history, documentation, tests, and safe setup. Derive a practical boundary from repository size; do not ask the user to choose a revision or scope. Never substitute a suggested project for an inaccessible URL.
 
 **Artifacts:** `case-studies/<team-slug>/context/target-manifest.md`, with URL, default branch, exact commit, retrieval time, scope, exclusions, and rationale.
 
@@ -76,7 +76,7 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 ## 9 — Verification and critique
 
-**Do:** Use a second reviewer/agent when available to challenge evidence, formulas, chapter coverage, source quality, contradictions, and overclaims. Compare conclusions against raw evidence and correct the source artifact, not just the narrative. Sequential self-review is the fallback. Do not wait for a human to approve the critique.
+**Do:** Use a second reviewer/agent when available to challenge evidence, formulas, chapter coverage, source quality, contradictions, and overclaims. Compare conclusions against raw evidence and correct the source artifact, not just the narrative. Build a structured ledger of claims and evidence and run `scripts/check_evidence.py` as described in `docs/EVIDENCE-CHECK.md`; enumerate deliverable claims from the actual report and slides. This structural check cannot verify factual support or discover omitted claims, so perform the independent source review too. Sequential self-review is the fallback. Do not wait for a human to approve the critique.
 
 **Artifacts:** `case-studies/<team-slug>/validation/findings-review.md`, citation/evidence ledger, issue list, correction log.
 
@@ -86,9 +86,9 @@ This map turns the course-wide case study into small, reviewable steps. Each tea
 
 **Do:** Assemble an academic report, seminar deck, supporting SRS/design/metrics/testing/maintenance artifacts, evidence repository, and viva questions from verified outputs. Include methodology, limitations, AI-use disclosure according to instructor rules, and reproducibility notes. The proposed sizes (30–50 report pages and 15–25 slides) are optional targets from the conversation, not requirements.
 
-**Artifacts:** editable Word report (`.docx`) and editable PowerPoint (`.pptx`), their source files, viva material and final evidence index under `case-studies/<team-slug>/deliverables/`. Follow `docs/DEVELOPMENT-PLAN.md` and the generator guides.
+**Artifacts:** English editable Word report (`.docx`) and English editable PowerPoint (`.pptx`), their source files, English viva material and final evidence index under `case-studies/<team-slug>/deliverables/`. Add a separate Arabic presenter script mapped to every slide and include the narration in speaker notes when supported. Follow `docs/DEVELOPMENT-PLAN.md` and the generator guides.
 
-**Gate:** Report and slides agree with the evidence ledger; every chart/table can be traced to data; references are checked; viva material tests understanding rather than memorization. Open and render both files when tooling is available, inspect all pages/slides for legibility, clipping, overflow and alignment, fix defects, and repeat. Record any unavailable format or visual inspection explicitly as incomplete; do not claim a successful review without evidence.
+**Gate:** Report, visible slides, citations, diagrams and viva are in English and agree with the evidence ledger. The Arabic presenter script covers each slide and retains its meaning; check that speaker notes are preserved and Arabic is legible. Every chart/table can be traced to data; references are checked; viva material tests understanding rather than memorization. Open and render both files when tooling is available, inspect all pages/slides for legibility, clipping, overflow and alignment, fix defects, and repeat. Record any unavailable format or visual inspection explicitly as incomplete; do not claim a successful review without evidence.
 
 ## Evidence record minimum
 

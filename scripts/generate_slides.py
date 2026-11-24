@@ -63,7 +63,10 @@ def validate_deck(data: Any) -> dict[str, Any]:
         raise ValueError("Subtitle must be 150 characters or fewer")
     if not isinstance(slides, list) or not slides:
         raise ValueError("At least one content slide is required")
-    result = {"title": title.strip(), "subtitle": subtitle, "slides": []}
+    cover_notes = data.get("cover_notes", "")
+    if not isinstance(cover_notes, str) or len(cover_notes) > 4000:
+        raise ValueError("cover_notes must be a string of at most 4,000 characters")
+    result = {"title": title.strip(), "subtitle": subtitle, "cover_notes": cover_notes.strip(), "slides": []}
     for number, item in enumerate(slides, 1):
         if not isinstance(item, dict) or not isinstance(item.get("title"), str) or not item["title"].strip():
             raise ValueError(f"Slide {number} needs a non-empty title")
@@ -179,10 +182,15 @@ def add_notes(slide, notes: str, citations: list[str]) -> None:
     if not content:
         return
     try:
-        slide.notes_slide.notes_text_frame.text = content
-    except (AttributeError, NotImplementedError):
-        # Citations remain visible on-slide even for python-pptx builds without notes support.
-        pass
+        frame = slide.notes_slide.notes_text_frame
+        frame.text = content
+        # Arabic presenter narration reads right-to-left. The notes remain
+        # editable in PowerPoint; Latin source identifiers remain unchanged.
+        for paragraph in frame.paragraphs:
+            if re.search(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]", paragraph.text):
+                paragraph._p.get_or_add_pPr().set("rtl", "1")
+    except (AttributeError, NotImplementedError) as exc:
+        raise ValueError("Speaker notes cannot be embedded by this python-pptx version; preserve the separate presenter script and upgrade python-pptx") from exc
 
 
 def build_presentation(data: dict[str, Any], output: Path) -> None:
@@ -201,6 +209,7 @@ def build_presentation(data: dict[str, Any], output: Path) -> None:
         add_text(cover, 0.9, 3.7, 10.8, 0.9, data["subtitle"], size=20, fill=MUTED)
     add_text(cover, 0.9, 6.63, 10.8, 0.34, "ADVANCED SOFTWARE ENGINEERING  /  CASE STUDY", size=10,
              fill=ACCENT, bold=True)
+    add_notes(cover, data.get("cover_notes", ""), [])
 
     count = len(data["slides"])
     for index, item in enumerate(data["slides"], 1):

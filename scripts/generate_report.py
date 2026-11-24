@@ -2,8 +2,8 @@
 """Convert an academic case-study Markdown report to a formatted DOCX.
 
 Supported Markdown: headings, paragraphs, emphasis, inline code, links, lists,
-fenced code blocks, and simple pipe tables. This intentionally avoids pretending
-to be a full CommonMark implementation.
+fenced code blocks, standalone local images, and simple pipe tables. This
+intentionally avoids pretending to be a full CommonMark implementation.
 """
 from __future__ import annotations
 
@@ -11,9 +11,11 @@ import argparse
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
 
 try:
     from docx import Document
+    from docx.image.image import Image
     from docx.enum.section import WD_SECTION
     from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT
     from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -55,6 +57,7 @@ def add_page_field(paragraph) -> None:
 
 
 INLINE = re.compile(r"(\*\*.+?\*\*|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))")
+IMAGE_LINE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 
 
 def add_inline(paragraph, text: str) -> None:
@@ -88,7 +91,36 @@ def add_hyperlink(paragraph, label: str, url: str) -> None:
 
 
 def pipe_cells(line: str) -> list[str]:
-    return [part.strip() for part in line.strip().strip("|").split("|")]
+    """Split an outer-pipe table row without splitting escaped pipe characters.
+
+    Markdown escapes ``\\|`` and ``\\\\`` are decoded while scanning so odd and
+    even runs of backslashes before a pipe retain their intended meaning.
+    """
+    text = line.strip()
+    if text.startswith("|"):
+        text = text[1:]
+    cells: list[str] = []
+    cell: list[str] = []
+    last_was_separator = False
+    i = 0
+    while i < len(text):
+        char = text[i]
+        if char == "\\" and i + 1 < len(text) and text[i + 1] in "\\|":
+            cell.append(text[i + 1])
+            i += 2
+            last_was_separator = False
+            continue
+        if char == "|":
+            cells.append("".join(cell).strip())
+            cell = []
+            last_was_separator = True
+        else:
+            cell.append(char)
+            last_was_separator = False
+        i += 1
+    if not last_was_separator:
+        cells.append("".join(cell).strip())
+    return cells
 
 
 def is_separator(line: str) -> bool:
@@ -96,7 +128,28 @@ def is_separator(line: str) -> bool:
     return bool(cells) and all(re.fullmatch(r":?-{3,}:?", c.replace(" ", "")) for c in cells)
 
 
-def validate_markdown(lines: list[str]) -> None:
+def local_image(match: re.Match, base: Path, number: int) -> Path:
+    """Resolve an image within the report directory without network access."""
+    raw_path = match.group(2).strip()
+    parsed = urlsplit(raw_path)
+    candidate = Path(raw_path)
+    if (parsed.scheme or parsed.netloc or candidate.is_absolute() or
+            raw_path.startswith(("/", "\\"))):
+        raise ValueError(f"line {number}: image must be a local path relative to the report directory")
+    root = base.resolve()
+    image_path = (root / candidate).resolve()
+    if not image_path.is_relative_to(root):
+        raise ValueError(f"line {number}: image must remain inside the report directory")
+    if not image_path.is_file():
+        raise ValueError(f"line {number}: image not found: {raw_path}")
+    try:
+        Image.from_file(str(image_path))
+    except Exception as error:
+        raise ValueError(f"line {number}: unsupported or unreadable image: {raw_path}") from error
+    return image_path
+
+
+def validate_markdown(lines: list[str], base: Path) -> None:
     """Reject constructs the deliberately small reader cannot represent safely."""
     in_fence = False
     for number, line in enumerate(lines, 1):
@@ -106,8 +159,11 @@ def validate_markdown(lines: list[str]) -> None:
             continue
         if in_fence:
             continue
-        if re.search(r"!\[[^\]]*\]\([^)]*\)", line):
-            raise ValueError(f"line {number}: Markdown images are unsupported; remove or convert the image before generating DOCX")
+        if "![" in line:
+            image = IMAGE_LINE.fullmatch(stripped)
+            if not image:
+                raise ValueError(f"line {number}: images must use a standalone ![caption](relative/path) line")
+            local_image(image, base, number)
         if re.search(r"\[\^[^\]]+\](?::)?", line):
             raise ValueError(f"line {number}: Markdown footnotes are unsupported; use an inline citation or add the footnote in Word after conversion")
         if re.match(r"^\s{2,}[-*+]\s+|^\s{2,}\d+[.)]\s+", line):
@@ -119,12 +175,24 @@ def validate_markdown(lines: list[str]) -> None:
         if stripped.startswith("|") and number < len(lines) and lines[number].strip().startswith("|") and is_separator(lines[number]):
             if any(":" in cell for cell in pipe_cells(lines[number])):
                 raise ValueError(f"line {number + 1}: aligned pipe tables are unsupported; use a plain separator row")
+            expected = len(pipe_cells(line))
+            actual = len(pipe_cells(lines[number]))
+            if actual != expected:
+                raise ValueError(f"line {number + 1}: table separator has {actual} cells; expected {expected} from header")
+            row_index = number + 1
+            while row_index < len(lines) and lines[row_index].strip().startswith("|"):
+                actual = len(pipe_cells(lines[row_index]))
+                if actual != expected:
+                    raise ValueError(f"line {row_index + 1}: table row has {actual} cells; expected {expected} from header")
+                row_index += 1
 
 
 def add_table(document, rows: list[list[str]]) -> None:
     if not rows:
         return
-    width = max(map(len, rows))
+    width = len(rows[0])
+    if any(len(row) != width for row in rows):
+        raise ValueError("table rows do not match the header width")
     table = document.add_table(rows=len(rows), cols=width)
     table.autofit = True
     table.style = "Table Grid"
@@ -166,9 +234,31 @@ def configure(document, title: str) -> None:
     add_page_field(footer)
 
 
+def add_local_image(document, path: Path, caption: str) -> None:
+    """Insert the image within the page bounds and preserve its aspect ratio."""
+    section = document.sections[-1]
+    max_width = section.page_width - section.left_margin - section.right_margin
+    # Leave room for a caption and the paragraph spacing on the same page.
+    max_height = min(Inches(6.0), section.page_height - section.top_margin - section.bottom_margin - Inches(0.8))
+    paragraph = document.add_paragraph()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph.paragraph_format.keep_with_next = bool(caption)
+    shape = paragraph.add_run().add_picture(str(path))
+    factor = min(1.0, max_width / shape.width, max_height / shape.height)
+    if factor < 1:
+        shape.width = int(shape.width * factor)
+        shape.height = int(shape.height * factor)
+    # Text alternatives remain present even if the user removes the caption.
+    shape._inline.docPr.set("descr", caption)
+    if caption:
+        text = document.add_paragraph(style="Caption")
+        text.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        text.add_run(caption)
+
+
 def convert(source: Path, output: Path) -> None:
     lines = source.read_text(encoding="utf-8-sig").splitlines()
-    validate_markdown(lines)
+    validate_markdown(lines, source.parent)
     first_title = next((m.group(1).strip() for line in lines if (m := re.match(r"^#\s+(.+)$", line))), source.stem.replace("-", " "))
     doc = Document(); configure(doc, first_title)
     i = 0; paragraph_lines: list[str] = []
@@ -181,6 +271,12 @@ def convert(source: Path, output: Path) -> None:
         line = lines[i]; stripped = line.strip()
         if not stripped:
             flush(); i += 1; continue
+        image = IMAGE_LINE.fullmatch(stripped)
+        if image:
+            flush()
+            add_local_image(doc, local_image(image, source.parent, i + 1), image.group(1))
+            i += 1
+            continue
         if stripped.startswith("```"):
             flush(); i += 1; code = []
             while i < len(lines) and not lines[i].strip().startswith("```"):
